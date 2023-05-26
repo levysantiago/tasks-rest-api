@@ -9,3 +9,6 @@ db.test.json
 .env
 .env.test
 
+# locks
+package-lock.json
+yarn.lock
