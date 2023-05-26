@@ -1,0 +1,17 @@
+{
+  "name": "tasks-rest-api",
+  "version": "1.0.0",
+  "description": "A REST API for tasks crud.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch ./src/server.js"
+  },
+  "keywords": [],
+  "engines": {
+    "node": "v18.16.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
