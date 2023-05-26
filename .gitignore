@@ -1,1 +1,11 @@
+# dependencies
+node_modules
+
+# database
 db.json
+db.test.json
+
+# env
+.env
+.env.test
+
