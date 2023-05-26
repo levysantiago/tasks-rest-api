@@ -27,3 +27,9 @@ A REST API for tasks management.
 `PUT` - `/tasks/:id`
 `DELETE` - `/tasks/:id`
 `PATCH` - `/tasks/:id/complete`
+
+## Validações
+
+[x] Validar `title` e `description` no POST
+[] Validar `title` e `description` no PUT
+[] Validar se `:id` existe no banco retornar mensagem informando que registro não existe
