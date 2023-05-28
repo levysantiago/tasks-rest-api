@@ -33,6 +33,9 @@ export class Database{
     await fs.writeFile(databasePath, JSON.stringify(this.#database, null, 2))
   }
 
+  /**
+   * Function to insert data to database table
+   */
   insert = async (table, data)=>{
     await this.#fetch()
     // Creating task
@@ -56,6 +59,37 @@ export class Database{
     return task
   }
 
+  /**
+   * Function to update a registry on database
+   */
+  update = async (table, id, data)=>{
+    await this.#fetch()
+    if(!this.#database[table]){
+      throw new Error("Invalid table")
+    }
+
+    // Selecting task from database
+    let task = this.#database[table].find(task=>{
+      return task.id === id
+    })
+    if(!task) {
+      throw new Error("Task not found")
+    }
+
+    // Updating task
+    task.title = data.title ?? task.title, 
+    task.description = data.description ?? task.description,
+    task.completed_at = data.completed_at ?? task.completed_at,
+    task.updated_at = new Date(),
+    
+
+    // Persisting updates
+    await this.#persist()
+  }
+
+  /**
+   * Function to select data from database table
+   */
   select = async (table, where)=>{
     await this.#fetch()
     if(!this.#database[table]){

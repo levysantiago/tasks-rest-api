@@ -64,4 +64,31 @@ describe("Tasks routes", ()=>{
       expect.objectContaining({ title: "second task", description: "This is a new task"}),
     ])
   })
+
+  it("should update the registered task", async ()=>{
+    // Creating first task
+    await api.post("/tasks", {
+      title: "first task", 
+      description: "This is a new task"
+    })
+
+    // Listing tasks
+    let listResponse = await api.get("/tasks")
+
+    // Updating task
+    const response = await api.put(`/tasks/${listResponse.data.tasks[0].id}`, {
+      title: "new task title", 
+      description: "This is the new description of the old task",
+    })
+
+    // Listing tasks
+    listResponse = await api.get("/tasks")
+
+    expect(listResponse.data.tasks).toEqual([
+      expect.objectContaining({ 
+        title: "new task title", 
+        description: "This is the new description of the old task"
+      }),
+    ])
+  })
 })
