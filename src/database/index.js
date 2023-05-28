@@ -1,8 +1,8 @@
 import {randomUUID} from "node:crypto"
 import fs from "node:fs/promises"
+import {env} from "../env/index.js"
 
-const databaseFile = process.env.NODE_ENV === "development" ? process.env.DATABASE_FILE : "db.test.json"
-const databasePath = new URL(`./${databaseFile}`, import.meta.url)
+const databasePath = new URL(`./${env.DATABASE_FILE}`, import.meta.url)
 
 export class Database{
   #database = {}
