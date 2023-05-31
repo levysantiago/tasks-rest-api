@@ -10,7 +10,7 @@ Uma API REST para gerenciamento de tasks, utilizando fundamentos do node. Desafi
 
 [x] Atualização de uma task pelo `id`
 
-[] Remover uma task pelo `id`
+[x] Remover uma task pelo `id`
 
 [] Marcar pelo `id` uma task como completa
 

@@ -2,10 +2,12 @@ import {buildRoutePath} from "../utils/build-route-path.js"
 import { CreateTaskController } from "./create-task-controller.js"
 import { ListTasksController } from "./list-tasks-controller.js"
 import { UpdateTasksController } from "./update-task-controller.js"
+import { DeleteTasksController } from "./delete-task-controller.js"
 
 const createTaskController = new CreateTaskController()
 const listTasksController = new ListTasksController()
 const updateTasksController = new UpdateTasksController()
+const deleteTasksController = new DeleteTasksController()
 
 export const routes = [
   // CREATE TASK
@@ -23,5 +25,10 @@ export const routes = [
     method: "GET",
     path: buildRoutePath("/tasks"),
     handler: listTasksController.handle
+  },
+  {
+    method: "DELETE",
+    path: buildRoutePath("/tasks/:id"),
+    handler: deleteTasksController.handle
   }
 ]

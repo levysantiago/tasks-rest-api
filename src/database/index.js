@@ -97,11 +97,42 @@ export class Database{
     }
     
     if(where && where.id){
-      return this.#database[table].filter(task=>{
+      const task = this.#database[table].filter(task=>{
         return task.id === where.id
       })
+
+      if(!task) return null
+
+      return task
     }
 
     return this.#database[table]
+  }
+
+  /**
+   * Function to delete data from database table
+   */
+  delete = async (table, id)=>{
+    await this.#fetch()
+    if(!this.#database[table]){
+      throw new Error("Invalid table")
+    }
+    if(!id){
+      throw new Error("Expected an ID.")
+    }
+
+    const amountOfTasks = this.#database.tasks.length
+    
+    // Removing task
+    this.#database[table] = this.#database[table].filter(task=>{
+      return task.id !== id
+    })
+
+    if(amountOfTasks === this.#database.tasks.length){
+      throw new Error("Task not found")
+    }
+
+    // Persisting
+    await this.#persist()
   }
 }

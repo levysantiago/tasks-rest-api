@@ -91,4 +91,49 @@ describe("Tasks routes", ()=>{
       }),
     ])
   })
+
+  it("should delete registered task", async ()=>{
+    // Creating first task
+    await api.post("/tasks", {
+      title: "delete this task", 
+      description: "This task should be deleted."
+    })
+
+    // Listing tasks
+    let listResponse = await api.get("/tasks")
+
+    // Deleting task
+    await api.delete(`/tasks/${listResponse.data.tasks[0].id}`)
+
+    // Listing tasks
+    listResponse = await api.get("/tasks")
+
+    // Expecting task list is empty
+    expect(listResponse.data.tasks).toEqual([])
+  })
+
+  it("should throw not found error on delete", async ()=>{
+    // Creating first task
+    await api.post("/tasks", {
+      title: "delete this task", 
+      description: "This task should be deleted."
+    })
+
+    try{
+
+      // Deleting task
+      await api.delete(`/tasks/073f679e-70ad-4980-966f-0b05ed3a3ce3`)
+
+      throw new Error("Should throw error 'Task not found'")
+    }catch(err){
+      // Expecting task list is empty
+      expect(err.response.data).toEqual({
+        error: {
+          status: 404,
+          reason: "Task not found"
+        }
+      })
+    }
+      
+  })
 })
