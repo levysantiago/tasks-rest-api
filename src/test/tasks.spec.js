@@ -136,4 +136,26 @@ describe("Tasks routes", ()=>{
     }
       
   })
+
+  it("should complete task", async ()=>{
+    // Creating first task
+    await api.post("/tasks", {
+      title: "new task", 
+      description: "This is a new task."
+    })
+
+    // Listing tasks
+    let listResponse = await api.get("/tasks")
+    console.log(listResponse.data);
+
+    // Deleting task
+    await api.patch(`/tasks/${listResponse.data.tasks[0].id}/complete`)
+
+    // Listing tasks
+    listResponse = await api.get("/tasks")
+    console.log(listResponse.data);
+
+    // Expecting task is completed
+    expect(listResponse.data.tasks[0].completed_at).toBeTypeOf("string")
+  })
 })

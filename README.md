@@ -12,7 +12,7 @@ Uma API REST para gerenciamento de tasks, utilizando fundamentos do node. Desafi
 
 [x] Remover uma task pelo `id`
 
-[] Marcar pelo `id` uma task como completa
+[x] Marcar pelo `id` uma task como completa
 
 [] Importação de tasks em massa por um arquivo CSV
 
@@ -48,4 +48,4 @@ Uma API REST para gerenciamento de tasks, utilizando fundamentos do node. Desafi
 
 [x] Validar `title` e `description` no PUT
 
-[] Validar se `:id` existe no banco retornar mensagem informando que registro não existe
+[x] Validar se `:id` existe no banco retornar mensagem informando que registro não existe
