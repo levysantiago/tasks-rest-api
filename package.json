@@ -19,9 +19,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.21.5",
     "axios": "^1.4.0",
-    "babel-plugin-transform-import-meta": "^2.2.0",
     "vitest": "^0.31.1"
   }
 }
