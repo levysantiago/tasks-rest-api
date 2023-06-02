@@ -1,3 +1,5 @@
+[![Node.js CI](https://github.com/levysantiago/tasks-rest-api/actions/workflows/node.js.yml/badge.svg)](https://github.com/levysantiago/tasks-rest-api/actions/workflows/node.js.yml)
+
 # Tasks REST API
 
 Uma API REST para gerenciamento de tasks, utilizando fundamentos do node. Desafio Ignite Node.js da Rocketseat.
