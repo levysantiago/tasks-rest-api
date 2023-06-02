@@ -78,7 +78,7 @@ describe("Tasks routes", ()=>{
     let listResponse = await api.get("/tasks")
 
     // Updating task
-    const response = await api.put(`/tasks/${listResponse.data.tasks[0].id}`, {
+    await api.put(`/tasks/${listResponse.data.tasks[0].id}`, {
       title: "new task title", 
       description: "This is the new description of the old task",
     })
@@ -92,6 +92,33 @@ describe("Tasks routes", ()=>{
         description: "This is the new description of the old task"
       }),
     ])
+  })
+
+  it("should throw not found error on update", async ()=>{
+    // Creating first task
+    await api.post("/tasks", {
+      title: "update this task", 
+      description: "This task should be updated."
+    })
+
+    try{
+
+      // Trying to update task
+      await api.put(`/tasks/073f679e-70ad-4980-966f-0b05ed3a3ce3`, {
+        title: "new task title", 
+        description: "This is the new description of the old task",
+      })
+
+      throw new Error("Should throw error 'Task not found'")
+    }catch(err){
+      // Expecting task list is empty
+      expect(err.response.data).toEqual({
+        error: {
+          status: 404,
+          reason: "Task not found"
+        }
+      })
+    }
   })
 
   it("should delete registered task", async ()=>{
@@ -136,7 +163,6 @@ describe("Tasks routes", ()=>{
         }
       })
     }
-      
   })
 
   it("should complete task", async ()=>{
