@@ -2,7 +2,9 @@ import {config} from  "dotenv"
 import axios from "axios"
 import app from "../app"
 import fs from "node:fs/promises"
+import fsSync from "node:fs"
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest"
+import { resolve } from "node:path"
 
 config({path: new URL("../../.env.test", import.meta.url), encoding: "utf8"})
 
@@ -146,16 +148,31 @@ describe("Tasks routes", ()=>{
 
     // Listing tasks
     let listResponse = await api.get("/tasks")
-    console.log(listResponse.data);
 
     // Deleting task
     await api.patch(`/tasks/${listResponse.data.tasks[0].id}/complete`)
 
     // Listing tasks
     listResponse = await api.get("/tasks")
-    console.log(listResponse.data);
 
     // Expecting task is completed
     expect(listResponse.data.tasks[0].completed_at).toBeTypeOf("string")
+  })
+
+  it("should create tasks by csv file", async ()=>{
+    // Creating first task
+    await api.post("/tasks/csv", fsSync.createReadStream(resolve(__dirname, '../../assets/csvExample.csv')), {headers: {"Content-Type": "multipart/form-data"}})
+
+    // Listing tasks
+    let listResponse = await api.get("/tasks")
+
+    // Expecting tasks were created
+    expect(listResponse.data.tasks).toEqual([
+      expect.objectContaining({ title: "Task 01", description: "Descrição da Task 01"}),
+      expect.objectContaining({ title: "Task 02", description: "Descrição da Task 02"}),
+      expect.objectContaining({ title: "Task 03", description: "Descrição da Task 03"}),
+      expect.objectContaining({ title: "Task 04", description: "Descrição da Task 04"}),
+      expect.objectContaining({ title: "Task 05", description: "Descrição da Task 05"}),
+    ])
   })
 })

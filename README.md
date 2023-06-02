@@ -2,50 +2,33 @@
 
 Uma API REST para gerenciamento de tasks, utilizando fundamentos do node. Desafio Ignite Node.js da Rocketseat.
 
-## Funcionalidades
+## Getting Started
 
-[x] Criação de uma task
+### Installing Dependencies
+```
+npm i
+```
 
-[x] Listagem de todas as tasks
+```
+yarn
+```
 
-[x] Atualização de uma task pelo `id`
+### Running project
 
-[x] Remover uma task pelo `id`
+```
+npm run dev
+```
 
-[x] Marcar pelo `id` uma task como completa
+```
+yarn dev
+```
 
-[] Importação de tasks em massa por um arquivo CSV
+### Running tests
 
-## Estrutura de uma task
+```
+npm run test
+```
 
-`id`: Id único da task
-
-`title`: Título da task
-
-`description`: Descrição detalhada da task
-
-`completed_at`: Data de quando task foi completada. Valor inicial deve ser `null`
-
-`created_at`: Data de quando task foi criada
-
-`updated_at`: Data de quando task foi atualizada
-
-## Rotas
-
-`POST` - `/tasks`
-
-`GET` - `/tasks`
-
-`PUT` - `/tasks/:id`
-
-`DELETE` - `/tasks/:id`
-
-`PATCH` - `/tasks/:id/complete`
-
-## Validações
-
-[x] Validar `title` e `description` no POST
-
-[x] Validar `title` e `description` no PUT
-
-[x] Validar se `:id` existe no banco retornar mensagem informando que registro não existe
+```
+yarn test
+```

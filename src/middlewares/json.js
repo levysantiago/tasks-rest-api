@@ -4,7 +4,7 @@ export async function json(req, res){
   for await (const chunk of req){
     buffers.push(chunk)
   }
-
+  
   try{
     req.body = JSON.parse(Buffer.concat(buffers).toString())
   }catch{
